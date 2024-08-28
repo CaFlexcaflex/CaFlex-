@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier Recharge</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input, select {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .error {
+            color: #d9534f;
+            font-size: 14px;
+            margin-top: -15px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Modifier Recharge</h1>
+    <div class="container">
+        <form id="modifyForm">
+            <label for="dateTime">Date et Heure:</label>
+            <input type="text" id="dateTime" name="dateTime" required>
+
+            <label for="amount">Montant:</label>
+            <input type="number" id="amount" name="amount" required>
+
+            <label for="paymentNumber">Numéro de Paiement:</label>
+            <input type="text" id="paymentNumber" name="paymentNumber" required>
+
+            <label for="transactionId">ID de Transaction:</label>
+            <input type="text" id="transactionId" name="transactionId" required readonly>
+
+            <label for="operator">Opérateur:</label>
+            <select id="operator" name="operator" required>
+                <option value="MTN">MTN</option>
+                <option value="Moov">Moov</option>
+                <option value="WAVE">WAVE</option>
+                <option value="Orange">Orange</option>
+            </select>
+
+            <label for="status">Statut:</label>
+            <select id="status" name="status" required>
+                <option value="En attente">En attente</option>
+                <option value="Confirmé">Confirmé</option>
+                <option value="Rejeté">Rejeté</option>
+            </select>
+
+            <button type="submit">Mettre à Jour</button>
+            <p id="error-message" class="error"></p>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const transactionId = urlParams.get('id');
+
+            if (!transactionId) {
+                document.getElementById('error-message').textContent = 'Transaction introuvable.';
+                return;
+            }
+
+            let rechargeHistory = JSON.parse(localStorage.getItem('rechargeHistory')) || [];
+            let transaction = rechargeHistory.find(entry => entry.transactionId === transactionId);
+
+            if (!transaction) {
+                document.getElementById('error-message').textContent = 'Transaction introuvable.';
+                return;
+            }
+
+            document.getElementById('dateTime').value = transaction.dateTime;
+            document.getElementById('amount').value = transaction.amount;
+            document.getElementById('paymentNumber').value = transaction.paymentNumber;
+            document.getElementById('transactionId').value = transaction.transactionId;
+            document.getElementById('operator').value = transaction.operator;
+            document.getElementById('status').value = transaction.status;
+
+            document.getElementById('modifyForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                let updatedTransaction = {
+                    dateTime: document.getElementById('dateTime').value,
+                    amount: document.getElementById('amount').value,
+                    paymentNumber: document.getElementById('paymentNumber').value,
+                    transactionId: document.getElementById('transactionId').value,
+                    operator: document.getElementById('operator').value,
+                    status: document.getElementById('status').value
+                };
+
+                let index = rechargeHistory.findIndex(entry => entry.transactionId === transactionId);
+                if (index > -1) {
+                    rechargeHistory[index] = updatedTransaction;
+                    localStorage.setItem('rechargeHistory', JSON.stringify(rechargeHistory));
+                    alert('Informations mises à jour avec succès.');
+                } else {
+                    document.getElementById('error-message').textContent = 'Erreur lors de la mise à jour.';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Recharge</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        p {
+            color: #666;
+            font-size: 14px;
+            text-align: center;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        label {
+            font-size: 14px;
+            color: #333;
+            display: block;
+            margin-bottom: 8px;
+        }
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Recharge capFlex</h1>
+    <p>Veuillez copier l'un des numéros et faites le paiement. Copiez l'ID de transaction pour valider le paiement.</p>
+    <p>MTN MONEY: +225 0554049897</p>
+    <p>MOOV MONEY: 0140719995</p>
+    <p>ORANGE MONEY: 0703037591</p>
+    <p>WAVE CI: 0703037591</p>
+    
+    <form id="rechargeForm">
+        <label for="amount">Montant de paiement:</label>
+        <input type="number" id="amount" name="amount" required>
+
+        <label for="paymentNumber">Numéro de paiement:</label>
+        <input type="text" id="paymentNumber" name="paymentNumber" required>
+
+        <label for="transactionId">ID de transaction:</label>
+        <input type="text" id="transactionId" name="transactionId" required>
+
+        <label>Opérateur de recharge:</label>
+        <div>
+            <input type="radio" id="mtn" name="operator" value="MTN" required>
+            <label for="mtn">MTN</label>
+        </div>
+        <div>
+            <input type="radio" id="moov" name="operator" value="Moov">
+            <label for="moov">Moov</label>
+        </div>
+        <div>
+            <input type="radio" id="wave" name="operator" value="Wave">
+            <label for="wave">Wave</label>
+        </div>
+        <div>
+            <input type="radio" id="orange" name="operator" value="Orange">
+            <label for="orange">Orange</label>
+        </div>
+
+        <button type="submit">Soumettre</button>
+    </form>
+
+    <script>
+        document.getElementById('rechargeForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const amount = document.getElementById('amount').value;
+            const paymentNumber = document.getElementById('paymentNumber').value;
+            const transactionId = document.getElementById('transactionId').value;
+            const operator = document.querySelector('input[name="operator"]:checked').value;
+
+            const dateTime = new Date().toLocaleString(); // Date et heure actuelles
+            const status = 'En attente'; // Statut par défaut
+
+            let rechargeHistory = JSON.parse(localStorage.getItem('rechargeHistory')) || [];
+
+            rechargeHistory.push({
+                dateTime,
+                amount,
+                paymentNumber,
+                transactionId,
+                operator,
+                status
+            });
+
+            localStorage.setItem('rechargeHistory', JSON.stringify(rechargeHistory));
+
+            alert('Recharge soumise avec succès !');
+
+            // Redirige vers la page historique de recharge après soumission
+            window.location.href = 'historique_recharge.html';
+        });
+    </script>
+</body>
+</html>

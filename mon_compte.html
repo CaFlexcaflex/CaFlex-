@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Compte</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #3a3a3a;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        .account-info {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .account-info h2 {
+            margin-top: 0;
+            color: #4CAF50;
+            font-size: 24px;
+        }
+        .account-info p {
+            font-size: 18px;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .button-group button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            max-width: 300px;
+        }
+        .button-group button:hover {
+            background-color: #45a049;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .footer-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+        .footer-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    
+    <div class="container">
+        <div class="account-info">
+            <h2>Informations du Compte capFlex</h2>
+            <p>Solde: 00 FCFA</p>
+            <p>Revenus Quotidien: 00 FCFA</p>
+            <p>Compte LV: 0</p>
+        </div>
+
+        <div class="button-group">
+            <button onclick="window.location.href='historique_recharge.html'">Historique de Transaction</button>
+            <button onclick="window.location.href='historique_retrait.html'">Historique de Retrait</button>
+            <button onclick="window.location.href='compte_retrait.html'">Compte de Retrait</button>
+            <button onclick="window.location.href='carte_retrait.html'">Ma Carte de Retrait</button>
+            <button onclick="window.location.href='recharge.html'">Recharger</button>
+            <!-- Nouveau bouton Retrait -->
+            <button onclick="window.location.href='effectuer_retrait.html'">Retrait</button>
+        </div>
+    </div>
+
+    <footer>
+        <button class="footer-btn" onclick="window.location.href='index.html'">Accueil</button>
+        <button class="footer-btn" onclick="window.location.href='investir.html'">Investir</button>
+        <button class="footer-btn" onclick="window.location.href='equipe.html'">Équipe</button>
+        <button class="footer-btn" onclick="window.location.href='mon_compte.html'">Mon Compte</button>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Historique de Recharge</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        #rechargeHistory {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        p {
+            color: #666;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+        hr {
+            border: 1px solid #ddd;
+            margin: 20px 0;
+        }
+        .delete-btn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Historique de Recharge capFlex</h1>
+    <div id="rechargeHistory">
+        <!-- Les éléments de l'historique seront ajoutés ici -->
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let rechargeHistory = JSON.parse(localStorage.getItem('rechargeHistory')) || [];
+            let rechargeHistoryContainer = document.getElementById('rechargeHistory');
+
+            if (rechargeHistory.length === 0) {
+                rechargeHistoryContainer.innerHTML = '<p>Aucun historique de recharge trouvé.</p>';
+            } else {
+                rechargeHistory.forEach(function(entry, index) {
+                    let historyItem = document.createElement('div');
+                    historyItem.innerHTML = `
+                        <p><strong>Date et Heure:</strong> ${entry.dateTime}</p>
+                        <p><strong>Montant:</strong> ${entry.amount} FCFA</p>
+                        <p><strong>Numéro de Paiement:</strong> ${entry.paymentNumber}</p>
+                        <p><strong>ID de Transaction:</strong> ${entry.transactionId}</p>
+                        <p><strong>Opérateur:</strong> ${entry.operator}</p>
+                        <p><strong>Statut:</strong> ${entry.status}</p>
+                        <button class="delete-btn" data-index="${index}">Supprimer</button>
+                        <hr>
+                    `;
+                    rechargeHistoryContainer.appendChild(historyItem);
+                });
+
+                // Ajouter l'événement de suppression
+                document.querySelectorAll('.delete-btn').forEach(function(button) {
+                    button.addEventListener('click', function() {
+                        let index = this.getAttribute('data-index');
+                        rechargeHistory.splice(index, 1); // Supprime l'élément du tableau
+                        localStorage.setItem('rechargeHistory', JSON.stringify(rechargeHistory)); // Met à jour le localStorage
+                        location.reload(); // Recharger la page pour afficher les changements
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>

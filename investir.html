@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investissement</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #3a3a3a;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        main {
+            flex: 1;
+            padding: 20px;
+        }
+        .investment-level {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .investment-level h2 {
+            color: #4CAF50;
+            font-size: 22px;
+        }
+        .investment-level p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+        .invest-button {
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+            display: block;
+            width: 100%;
+        }
+        .invest-button:hover {
+            background-color: #c9302c;
+        }
+        .insufficient-funds {
+            color: red;
+            font-size: 18px;
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .footer-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+        }
+        .footer-btn:hover {
+            background-color: #45a049;
+        }
+        .footer-btn[href="mon_compte.html"] {
+            background-color: #d9534f; /* Couleur différente pour le bouton Mon Compte */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>capFlex investissement</h1>
+    </header>
+
+    <main>
+        <div class="investment-level">
+            <h2>Niveau 1 (LV 1)</h2>
+            <p>Montant Investi : 7 500 FCFA</p>
+            <p>Revenus Quotidiens : 1 000 FCFA</p>
+            <p>Durée du Cycle : 20 jours</p>
+            <p>Total des Réclamations : 20 000 FCFA</p>
+            <p>Bonus de Fidélité : 2 500 FCFA</p>
+            <button class="invest-button" onclick="showInsufficientFunds(this)">Investir</button>
+            <div class="insufficient-funds">Solde insuffisant</div>
+        </div>
+
+        <div class="investment-level">
+            <h2>Niveau 2 (LV 2)</h2>
+            <p>Montant Investi : 15 000 FCFA</p>
+            <p>Revenus Quotidiens : 2 200 FCFA</p>
+            <p>Durée du Cycle : 20 jours</p>
+            <p>Total des Réclamations : 44 000 FCFA</p>
+            <p>Bonus de Fidélité : 5 000 FCFA</p>
+            <button class="invest-button" onclick="showInsufficientFunds(this)">Investir</button>
+            <div class="insufficient-funds">Solde insuffisant</div>
+        </div>
+
+        <div class="investment-level">
+            <h2>Niveau 3 (LV 3)</h2>
+            <p>Montant Investi : 30 000 FCFA</p>
+            <p>Revenus Quotidiens : 4 500 FCFA</p>
+            <p>Durée du Cycle : 20 jours</p>
+            <p>Total des Réclamations : 90 000 FCFA</p>
+            <p>Bonus de Fidélité : 10 000 FCFA</p>
+            <button class="invest-button" onclick="showInsufficientFunds(this)">Investir</button>
+            <div class="insufficient-funds">Solde insuffisant</div>
+        </div>
+
+        <div class="investment-level">
+            <h2>Niveau 4 (LV 4)</h2>
+            <p>Montant Investi : 60 000 FCFA</p>
+            <p>Revenus Quotidiens : 9 500 FCFA</p>
+            <p>Durée du Cycle : 20 jours</p>
+            <p>Total des Réclamations : 190 000 FCFA</p>
+            <p>Bonus de Fidélité : 20 000 FCFA</p>
+            <button class="invest-button" onclick="showInsufficientFunds(this)">Investir</button>
+            <div class="insufficient-funds">Solde insuffisant</div>
+        </div>
+
+        <div class="investment-level">
+            <h2>Niveau 5 (LV 5)</h2>
+            <p>Montant Investi : 120 000 FCFA</p>
+            <p>Revenus Quotidiens : 19 500 FCFA</p>
+            <p>Durée du Cycle : 20 jours</p>
+            <p>Total des Réclamations : 390 000 FCFA</p>
+            <p>Bonus de Fidélité : 40 000 FCFA</p>
+            <button class="invest-button" onclick="showInsufficientFunds(this)">Investir</button>
+            <div class="insufficient-funds">Solde insuffisant</div>
+        </div>
+
+        <div class="investment-level">
+            <h2>Niveau 6 (LV 6)</h2>
+            <p>Montant Investi : 240 000 FCFA</p>
+            <p>Revenus Quotidiens : 39 000 FCFA</p>
+            <p>Durée du Cycle : 20 jours</p>
+            <p>Total des Réclamations : 780 000 FCFA</p>
+            <p>Bonus de Fidélité : 80 000 FCFA</p>
+            <button class="invest-button" onclick="showInsufficientFunds(this)">Investir</button>
+            <div class="insufficient-funds">Solde insuffisant</div>
+        </div>
+    </main>
+
+    <footer>
+        <button class="footer-btn" onclick="window.location.href='index.html'">Accueil</button>
+        <button class="footer-btn" onclick="window.location.href='investir.html'">Investir</button>
+        <button class="footer-btn" onclick="window.location.href='equipe.html'">Équipe</button>
+        <button class="footer-btn" onclick="window.location.href='mon_compte.html'">Mon Compte</button>
+    </footer>
+
+    <script>
+        function showInsufficientFunds(button) {
+            // Trouver le message de solde insuffisant associé au bouton cliqué
+            const message = button.nextElementSibling;
+            message.style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
